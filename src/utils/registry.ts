@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import { to } from ".";
+import { detectPackageManager, to } from ".";
 
 type OgComponent = {
   type: "components:ui";
@@ -16,7 +16,7 @@ type Component = {
 
 export type Components = Component[];
 
-export async function getRegistry(): Promise<Components | null> {
+export const getRegistry = async (): Promise<Components | null> => {
   const reqUrl = "https://ui.shadcn.com/registry/index.json";
   const [res, err] = await to(fetch(reqUrl));
 
@@ -39,11 +39,18 @@ export async function getRegistry(): Promise<Components | null> {
       }`,
     };
 
-    console.log(component);
-    
-
     return component;
   });
 
   return components;
-}
+};
+
+export const getInstallCmd = (components: string[]) => {
+  const packageManager = detectPackageManager();
+
+  if (packageManager === "pnpm") {
+    return `pnpm dlx shadcn-ui@latest add ${components.join(" ")}`;
+  }
+
+  return `npx shadcn-ui@latest add ${components.join(" ")}`;
+};

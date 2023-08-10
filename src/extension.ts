@@ -1,12 +1,16 @@
 import * as vscode from "vscode";
 
-import { getRegistry } from "./utils/registry";
+import { getInstallCmd, getRegistry } from "./utils/registry";
 import type { Components } from "./utils/registry";
 
 const commands = {
   addNewComponent: "shadcn-ui.addNewComponent",
   reloadComponentList: "shadcn-ui.reloadComponentList",
 } as const;
+
+const getTerminal = () => {
+  return vscode.window.createTerminal();
+};
 
 export function activate(context: vscode.ExtensionContext) {
   let registryData: Components;
@@ -34,8 +38,11 @@ export function activate(context: vscode.ExtensionContext) {
       if (!selectedComponent) {
         return;
       }
+      const terminal = getTerminal();
+      const cmd = getInstallCmd([selectedComponent.label]);
 
-      console.log({ selectedComponent });
+      terminal.show();
+      terminal.sendText(cmd);
     }),
     vscode.commands.registerCommand(commands.reloadComponentList, async () => {
       const newRegistryData = await getRegistry();
