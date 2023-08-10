@@ -14,6 +14,8 @@ type Component = {
   detail?: string;
 };
 
+export const shadCnDocUrl = "https://ui.shadcn.com/docs";
+
 export type Components = Component[];
 
 export const getRegistry = async (): Promise<Components | null> => {

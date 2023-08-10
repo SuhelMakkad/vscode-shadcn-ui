@@ -20,6 +20,10 @@
       {
         "command": "shadcn-ui.reloadComponentList",
         "title": "shadcn/ui: Reload Component List"
+      },
+      {
+        "command": "shadcn-ui.gotoDoc",
+        "title": "shadcn/ui: Open Documentation"
       }
     ]
   },

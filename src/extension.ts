@@ -1,11 +1,12 @@
 import * as vscode from "vscode";
 
-import { getInstallCmd, getRegistry } from "./utils/registry";
+import { getInstallCmd, getRegistry, shadCnDocUrl } from "./utils/registry";
 import type { Components } from "./utils/registry";
 
 const commands = {
   addNewComponent: "shadcn-ui.addNewComponent",
   reloadComponentList: "shadcn-ui.reloadComponentList",
+  gotoDoc: "shadcn-ui.gotoDoc",
 } as const;
 
 const getTerminal = () => {
@@ -56,6 +57,9 @@ export function activate(context: vscode.ExtensionContext) {
       registryData = newRegistryData;
 
       vscode.window.showInformationMessage("shadcn/ui: Reloaded components");
+    }),
+    vscode.commands.registerCommand(commands.gotoDoc, async () => {
+      vscode.env.openExternal(vscode.Uri.parse(shadCnDocUrl));
     }),
   ];
 
