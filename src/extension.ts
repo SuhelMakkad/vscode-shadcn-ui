@@ -24,10 +24,22 @@ export function activate(context: vscode.ExtensionContext) {
         registryData = newRegistryData;
       }
 
-      vscode.window.showInformationMessage("!!! Hello World from shadcn/ui!");
+      const selectedComponent = await vscode.window.showQuickPick(
+        registryData,
+        {
+          matchOnDescription: true,
+        }
+      );
+
+      if (!selectedComponent) {
+        return;
+      }
+
+      console.log({ selectedComponent });
     }),
     vscode.commands.registerCommand(commands.reloadComponentList, async () => {
       const newRegistryData = await getRegistry();
+      console.log(newRegistryData);
 
       if (!newRegistryData) {
         vscode.window.showErrorMessage("Can not get the component list");
@@ -36,7 +48,7 @@ export function activate(context: vscode.ExtensionContext) {
 
       registryData = newRegistryData;
 
-      vscode.window.showInformationMessage("Reloaded shadcn/ui components");
+      vscode.window.showInformationMessage("shadcn/ui: Reloaded components");
     }),
   ];
 

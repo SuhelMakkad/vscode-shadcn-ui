@@ -1,11 +1,17 @@
 import fetch from "node-fetch";
 import { to } from ".";
 
-type Component = {
-  name: string;
-  dependencies: string[];
-  files: string[];
+type OgComponent = {
   type: "components:ui";
+  name: string;
+  files: string[];
+  dependencies?: string[];
+  registryDependencies?: string[];
+};
+
+type Component = {
+  label: string;
+  detail?: string;
 };
 
 export type Components = Component[];
@@ -25,5 +31,19 @@ export async function getRegistry(): Promise<Components | null> {
     return null;
   }
 
-  return data as Components;
+  const components: Components = (data as OgComponent[]).map((c) => {
+    const component: Component = {
+      label: c.name,
+      detail: `dependencies: ${
+        c.dependencies ? c.dependencies.join(" ") : "no dependency"
+      }`,
+    };
+
+    console.log(component);
+    
+
+    return component;
+  });
+
+  return components;
 }
