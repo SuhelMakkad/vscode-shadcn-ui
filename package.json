@@ -2,6 +2,9 @@
   "name": "shadcn-ui",
   "displayName": "shadcn/ui",
   "description": "Add components from shadcn/ui directly from VS Code",
+  "repository": {
+    "url": "https://github.com/SuhelMakkad/vscode-shadcn-ui"
+  },
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.54.0"
