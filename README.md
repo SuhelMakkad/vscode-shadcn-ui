@@ -1,3 +1,3 @@
-# shadcn-ui
+# VS Code extension for shadcn/ui
 
-This will help install the shadcn/ui components directly from vs code
+This will help install the [shadcn/ui](https://ui.shadcn.com) components directly from vs code
