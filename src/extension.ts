@@ -1,22 +1,29 @@
 import * as vscode from "vscode";
 
-import { getInstallCmd, getRegistry, shadCnDocUrl } from "./utils/registry";
+import {
+  getInitCmd,
+  getInstallCmd,
+  getRegistry,
+  shadCnDocUrl,
+} from "./utils/registry";
 import type { Components } from "./utils/registry";
+import { executeCommand } from "./utils/vscode";
 
 const commands = {
+  initCli: "shadcn-ui.initCli",
   addNewComponent: "shadcn-ui.addNewComponent",
   reloadComponentList: "shadcn-ui.reloadComponentList",
   gotoDoc: "shadcn-ui.gotoDoc",
 } as const;
 
-const getTerminal = () => {
-  return vscode.window.createTerminal();
-};
-
 export function activate(context: vscode.ExtensionContext) {
   let registryData: Components;
 
-  let disposables: vscode.Disposable[] = [
+  const disposables: vscode.Disposable[] = [
+    vscode.commands.registerCommand(commands.initCli, async () => {
+      const intCmd = getInitCmd();
+      executeCommand(intCmd);
+    }),
     vscode.commands.registerCommand(commands.addNewComponent, async () => {
       if (!registryData) {
         const newRegistryData = await getRegistry();
@@ -39,15 +46,12 @@ export function activate(context: vscode.ExtensionContext) {
       if (!selectedComponent) {
         return;
       }
-      const terminal = getTerminal();
-      const cmd = getInstallCmd([selectedComponent.label]);
 
-      terminal.show();
-      terminal.sendText(cmd);
+      const installCmd = getInstallCmd([selectedComponent.label]);
+      executeCommand(installCmd);
     }),
     vscode.commands.registerCommand(commands.reloadComponentList, async () => {
       const newRegistryData = await getRegistry();
-      console.log(newRegistryData);
 
       if (!newRegistryData) {
         vscode.window.showErrorMessage("Can not get the component list");

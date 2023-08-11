@@ -28,6 +28,10 @@
   "contributes": {
     "commands": [
       {
+        "command": "shadcn-ui.initCli",
+        "title": "shadcn/ui: Install CLI"
+      },
+      {
         "command": "shadcn-ui.addNewComponent",
         "title": "shadcn/ui: Add New Component"
       },

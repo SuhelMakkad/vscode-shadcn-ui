@@ -57,3 +57,12 @@ export const getInstallCmd = (components: string[]) => {
 
   return `npx shadcn-ui@latest add ${componentStr}`;
 };
+
+export const getInitCmd = () => {
+  const packageManager = detectPackageManager();
+  if (packageManager === "pnpm") {
+    return "pnpm dlx shadcn-ui@latest init";
+  }
+
+  return "npx shadcn-ui@latest init";
+};
