@@ -49,10 +49,11 @@ export const getRegistry = async (): Promise<Components | null> => {
 
 export const getInstallCmd = (components: string[]) => {
   const packageManager = detectPackageManager();
+  const componentStr = components.join(" ");
 
   if (packageManager === "pnpm") {
-    return `pnpm dlx shadcn-ui@latest add ${components.join(" ")}`;
+    return `pnpm dlx shadcn-ui@latest add ${componentStr}`;
   }
 
-  return `npx shadcn-ui@latest add ${components.join(" ")}`;
+  return `npx shadcn-ui@latest add ${componentStr}`;
 };
