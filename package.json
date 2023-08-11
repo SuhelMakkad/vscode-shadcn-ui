@@ -4,7 +4,12 @@
   "description": "Add components from shadcn/ui directly from VS Code",
   "publisher": "SuhelMakkad",
   "repository": {
+    "type": "git",
     "url": "https://github.com/SuhelMakkad/vscode-shadcn-ui"
+  },
+  "bugs": {
+    "url": "https://github.com/SuhelMakkad/vscode-shadcn-ui/issues",
+    "email": "makadsuhel11@gmail.com"
   },
   "version": "0.0.2",
   "engines": {
@@ -13,6 +18,11 @@
   "categories": [
     "Other"
   ],
+  "icon": "https://ui.shadcn.com/favicon.ico",
+  "galleryBanner": {
+    "color": "#C80000",
+    "theme": "dark"
+  },
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
