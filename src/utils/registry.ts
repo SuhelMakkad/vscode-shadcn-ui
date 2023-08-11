@@ -1,5 +1,6 @@
 import fetch from "node-fetch";
-import { detectPackageManager, to } from ".";
+import { to } from ".";
+import { detectPackageManager } from "./vscode";
 
 type OgComponent = {
   type: "components:ui";
@@ -47,8 +48,8 @@ export const getRegistry = async (): Promise<Components | null> => {
   return components;
 };
 
-export const getInstallCmd = (components: string[]) => {
-  const packageManager = detectPackageManager();
+export const getInstallCmd = async (components: string[]) => {
+  const packageManager = await detectPackageManager();
   const componentStr = components.join(" ");
 
   if (packageManager === "pnpm") {
@@ -58,8 +59,9 @@ export const getInstallCmd = (components: string[]) => {
   return `npx shadcn-ui@latest add ${componentStr}`;
 };
 
-export const getInitCmd = () => {
-  const packageManager = detectPackageManager();
+export const getInitCmd = async () => {
+  const packageManager = await detectPackageManager();
+
   if (packageManager === "pnpm") {
     return "pnpm dlx shadcn-ui@latest init";
   }

@@ -21,7 +21,7 @@ export function activate(context: vscode.ExtensionContext) {
 
   const disposables: vscode.Disposable[] = [
     vscode.commands.registerCommand(commands.initCli, async () => {
-      const intCmd = getInitCmd();
+      const intCmd = await getInitCmd();
       executeCommand(intCmd);
     }),
     vscode.commands.registerCommand(commands.addNewComponent, async () => {
@@ -47,7 +47,7 @@ export function activate(context: vscode.ExtensionContext) {
         return;
       }
 
-      const installCmd = getInstallCmd([selectedComponent.label]);
+      const installCmd = await getInstallCmd([selectedComponent.label]);
       executeCommand(installCmd);
     }),
     vscode.commands.registerCommand(commands.reloadComponentList, async () => {
