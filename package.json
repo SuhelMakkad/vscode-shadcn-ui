@@ -11,14 +11,14 @@
     "url": "https://github.com/SuhelMakkad/vscode-shadcn-ui/issues",
     "email": "makadsuhel11@gmail.com"
   },
-  "version": "0.0.21",
+  "version": "0.0.20",
   "engines": {
     "vscode": "^1.54.0"
   },
   "categories": [
     "Other"
   ],
-  "icon": "https://ui.shadcn.com/favicon.ico",
+  "icon": "images/icon.png",
   "galleryBanner": {
     "color": "#C80000",
     "theme": "dark"
