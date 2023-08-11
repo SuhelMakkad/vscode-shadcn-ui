@@ -6,7 +6,7 @@
   "repository": {
     "url": "https://github.com/SuhelMakkad/vscode-shadcn-ui"
   },
-  "version": "0.0.1",
+  "version": "0.0.11",
   "engines": {
     "vscode": "^1.54.0"
   },
