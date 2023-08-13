@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Report any issues with the platform
+about: Report any issues with the extension
 title: ""
 labels: bug
 assignees: ""
@@ -31,4 +31,5 @@ Any other relevant information. For example, why do you consider this a bug and 
 ### Technical details
 
 - Node.js version
+- VS Code version
 - Anything else that you think could be an issue.
