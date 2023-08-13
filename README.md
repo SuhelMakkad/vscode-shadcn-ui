@@ -4,8 +4,9 @@ This will help install the [shadcn/ui](https://ui.shadcn.com) components directl
 
 ## Initialize shadcn/ui CLI
 
-<video src="https://github.com/SuhelMakkad/vscode-shadcn-ui/assets/demo-videos/install-cli.webm"></video>
+https://github.com/SuhelMakkad/vscode-shadcn-ui/assets/71591136/c34a28ae-d458-4880-9bb8-d7d6dfec0c11
 
 ## Install Components
 
-<video src="https://github.com/SuhelMakkad/vscode-shadcn-ui/assets/demo-videos/add-component.webm"></video>
+https://github.com/SuhelMakkad/vscode-shadcn-ui/assets/71591136/2775cffb-9792-48e6-82b2-39430ab6deb8
+
