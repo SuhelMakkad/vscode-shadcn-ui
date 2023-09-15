@@ -1,4 +1,5 @@
 import fetch from "node-fetch";
+
 import { to } from ".";
 import { detectPackageManager } from "./vscode";
 
@@ -52,6 +53,10 @@ export const getInstallCmd = async (components: string[]) => {
   const packageManager = await detectPackageManager();
   const componentStr = components.join(" ");
 
+  if (packageManager === "bun") {
+    return `bun shadcn-ui add ${componentStr}`;
+  }
+  
   if (packageManager === "pnpm") {
     return `pnpm dlx shadcn-ui@latest add ${componentStr}`;
   }
@@ -62,6 +67,10 @@ export const getInstallCmd = async (components: string[]) => {
 export const getInitCmd = async () => {
   const packageManager = await detectPackageManager();
 
+  if (packageManager === "bun") {
+    return "bun shadcn-ui init"
+  }
+  
   if (packageManager === "pnpm") {
     return "pnpm dlx shadcn-ui@latest init";
   }
