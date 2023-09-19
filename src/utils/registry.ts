@@ -54,7 +54,7 @@ export const getInstallCmd = async (components: string[]) => {
   const componentStr = components.join(" ");
 
   if (packageManager === "bun") {
-    return `bun shadcn-ui add ${componentStr}`;
+    return `bunx shadcn-ui add ${componentStr}`;
   }
   
   if (packageManager === "pnpm") {
@@ -68,7 +68,7 @@ export const getInitCmd = async () => {
   const packageManager = await detectPackageManager();
 
   if (packageManager === "bun") {
-    return "bun shadcn-ui init"
+    return "bunx shadcn-ui init"
   }
   
   if (packageManager === "pnpm") {
