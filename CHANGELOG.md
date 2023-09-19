@@ -8,8 +8,14 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - Initial release
 
-## [0.0.3] - 2023-09-15
+## [0.0.301] - 2023-09-15
 
 ### Added
 
 - Support for bun
+
+## [0.0.302] - 2023-09-15
+
+### Fixed
+
+- Fixed type for bunx
