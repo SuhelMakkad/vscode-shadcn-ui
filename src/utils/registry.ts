@@ -38,9 +38,7 @@ export const getRegistry = async (): Promise<Components | null> => {
   const components: Components = (data as OgComponent[]).map((c) => {
     const component: Component = {
       label: c.name,
-      detail: `dependencies: ${
-        c.dependencies ? c.dependencies.join(" ") : "no dependency"
-      }`,
+      detail: `dependencies: ${c.dependencies ? c.dependencies.join(" ") : "no dependency"}`,
     };
 
     return component;
@@ -56,7 +54,7 @@ export const getInstallCmd = async (components: string[]) => {
   if (packageManager === "bun") {
     return `bunx shadcn-ui add ${componentStr}`;
   }
-  
+
   if (packageManager === "pnpm") {
     return `pnpm dlx shadcn-ui@latest add ${componentStr}`;
   }
@@ -68,12 +66,16 @@ export const getInitCmd = async () => {
   const packageManager = await detectPackageManager();
 
   if (packageManager === "bun") {
-    return "bunx shadcn-ui init"
+    return "bunx shadcn-ui init";
   }
-  
+
   if (packageManager === "pnpm") {
     return "pnpm dlx shadcn-ui@latest init";
   }
 
   return "npx shadcn-ui@latest init";
+};
+
+export const getComponentDocLink = (component: string) => {
+  return `${shadCnDocUrl}/components/${component}`;
 };

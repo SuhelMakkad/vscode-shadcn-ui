@@ -1,12 +1,19 @@
 import * as vscode from "vscode";
 
-import { getInitCmd, getInstallCmd, getRegistry, shadCnDocUrl } from "./utils/registry";
+import {
+  getInitCmd,
+  getInstallCmd,
+  getComponentDocLink,
+  getRegistry,
+  shadCnDocUrl,
+} from "./utils/registry";
 import type { Components } from "./utils/registry";
 import { executeCommand } from "./utils/vscode";
 
 const commands = {
   initCli: "shadcn-ui.initCli",
   addNewComponent: "shadcn-ui.addNewComponent",
+  gotoComponentDoc: "shadcn-ui.gotoComponentDoc",
   reloadComponentList: "shadcn-ui.reloadComponentList",
   gotoDoc: "shadcn-ui.gotoDoc",
 } as const;
@@ -20,6 +27,29 @@ export function activate(context: vscode.ExtensionContext) {
       executeCommand(intCmd);
     }),
     vscode.commands.registerCommand(commands.addNewComponent, async () => {
+      if (!registryData) {
+        const newRegistryData = await getRegistry();
+
+        if (!newRegistryData) {
+          vscode.window.showErrorMessage("Can not get the component list");
+          return;
+        }
+
+        registryData = newRegistryData;
+      }
+
+      const selectedComponent = await vscode.window.showQuickPick(registryData, {
+        matchOnDescription: true,
+      });
+
+      if (!selectedComponent) {
+        return;
+      }
+
+      const componentDocLink = getComponentDocLink(selectedComponent.label);
+      vscode.env.openExternal(vscode.Uri.parse(componentDocLink));
+    }),
+    vscode.commands.registerCommand(commands.gotoComponentDoc, async () => {
       if (!registryData) {
         const newRegistryData = await getRegistry();
 
