@@ -19,3 +19,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ### Fixed
 
 - Fixed type for bunx
+
+## [0.1.1] - 2023-09-28
+
+### Added
+
+- Added option to open documentation for a component

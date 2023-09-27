@@ -46,8 +46,8 @@ export function activate(context: vscode.ExtensionContext) {
         return;
       }
 
-      const componentDocLink = getComponentDocLink(selectedComponent.label);
-      vscode.env.openExternal(vscode.Uri.parse(componentDocLink));
+      const installCmd = await getInstallCmd([selectedComponent.label]);
+      executeCommand(installCmd);
     }),
     vscode.commands.registerCommand(commands.gotoComponentDoc, async () => {
       if (!registryData) {
@@ -69,8 +69,8 @@ export function activate(context: vscode.ExtensionContext) {
         return;
       }
 
-      const installCmd = await getInstallCmd([selectedComponent.label]);
-      executeCommand(installCmd);
+      const componentDocLink = getComponentDocLink(selectedComponent.label);
+      vscode.env.openExternal(vscode.Uri.parse(componentDocLink));
     }),
     vscode.commands.registerCommand(commands.reloadComponentList, async () => {
       const newRegistryData = await getRegistry();
