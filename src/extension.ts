@@ -1,11 +1,6 @@
 import * as vscode from "vscode";
 
-import {
-  getInitCmd,
-  getInstallCmd,
-  getRegistry,
-  shadCnDocUrl,
-} from "./utils/registry";
+import { getInitCmd, getInstallCmd, getRegistry, shadCnDocUrl } from "./utils/registry";
 import type { Components } from "./utils/registry";
 import { executeCommand } from "./utils/vscode";
 
@@ -36,12 +31,9 @@ export function activate(context: vscode.ExtensionContext) {
         registryData = newRegistryData;
       }
 
-      const selectedComponent = await vscode.window.showQuickPick(
-        registryData,
-        {
-          matchOnDescription: true,
-        }
-      );
+      const selectedComponent = await vscode.window.showQuickPick(registryData, {
+        matchOnDescription: true,
+      });
 
       if (!selectedComponent) {
         return;
