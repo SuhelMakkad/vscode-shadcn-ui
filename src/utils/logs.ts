@@ -12,7 +12,6 @@ export const logCmd = async (cmd: string) => {
     packageManager,
     os: type,
     vscodeVersion: vscode.version,
-    authentication: `Bearer ${process.env.BEARER_TOKE}`,
   };
 
   const reqUrl = `${BASE_URL}/api/log`;
