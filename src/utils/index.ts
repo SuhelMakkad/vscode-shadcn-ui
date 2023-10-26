@@ -1,5 +1,3 @@
-import { existsSync } from "fs";
-
 export const to = async <T>(promise: Promise<T>) => {
   try {
     const res = await promise;

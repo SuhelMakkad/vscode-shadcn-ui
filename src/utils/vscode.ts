@@ -1,5 +1,7 @@
 import * as vscode from "vscode";
 
+export type PackageManager = "npm" | "pnpm" | "yarn" | "bun";
+
 export const executeCommand = (cmd: string, createNew = true): void => {
   let terminal = vscode.window.activeTerminal;
   if (createNew || !terminal) {
@@ -32,7 +34,7 @@ export const getFileStat = async (fileName: string) => {
   }
 };
 
-export const detectPackageManager = async () => {
+export const detectPackageManager = async (): Promise<PackageManager> => {
   const bunLockExists = await getFileStat("bun.lockb");
   if (bunLockExists) {
     return "bun";

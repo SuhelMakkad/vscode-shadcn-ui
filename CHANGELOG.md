@@ -25,3 +25,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ### Added
 
 - Added option to open documentation for a component
+
+## [0.1.2] - 2023-10-26
+
+### Added
+
+- Simple logs
