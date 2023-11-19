@@ -14,6 +14,7 @@ import type { Components } from "./utils/registry";
 const commands = {
   initCli: "shadcn-ui.initCli",
   addNewComponent: "shadcn-ui.addNewComponent",
+  addMultipleComponents: "shadcn-ui.addMultipleComponents",
   gotoComponentDoc: "shadcn-ui.gotoComponentDoc",
   reloadComponentList: "shadcn-ui.reloadComponentList",
   gotoDoc: "shadcn-ui.gotoDoc",
@@ -54,6 +55,36 @@ export function activate(context: vscode.ExtensionContext) {
 
       await logCmd(installCmd);
     }),
+
+    vscode.commands.registerCommand(commands.addMultipleComponents, async () => {
+      if (!registryData) {
+        const newRegistryData = await getRegistry();
+
+        if (!newRegistryData) {
+          vscode.window.showErrorMessage("Can not get the component list");
+          return;
+        }
+
+        registryData = newRegistryData;
+      }
+
+      const selectedComponents = await vscode.window.showQuickPick(registryData, {
+        matchOnDescription: true,
+        canPickMany: true
+      });
+
+      if (!selectedComponents) {
+        return;
+      }
+
+      const selectedComponent = selectedComponents.map((component) => component.label);
+
+      const installCmd = await getInstallCmd(selectedComponent);
+      executeCommand(installCmd);
+
+      await logCmd(installCmd);
+    }),
+
     vscode.commands.registerCommand(commands.gotoComponentDoc, async () => {
       if (!registryData) {
         const newRegistryData = await getRegistry();
@@ -103,4 +134,4 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 // This method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() { }
