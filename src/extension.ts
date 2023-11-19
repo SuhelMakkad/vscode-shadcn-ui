@@ -3,7 +3,6 @@ import * as vscode from "vscode";
 import {
   getInitCmd,
   getInstallCmd,
-  getInstallMultipleComponents,
   getComponentDocLink,
   getRegistry,
   shadCnDocUrl,
@@ -80,7 +79,7 @@ export function activate(context: vscode.ExtensionContext) {
 
       const selectedComponent = selectedComponents.map((component) => component.label);
 
-      const installCmd = await getInstallMultipleComponents(selectedComponent.join(' '));
+      const installCmd = await getInstallCmd(selectedComponent);
       executeCommand(installCmd);
 
       await logCmd(installCmd);
@@ -135,4 +134,4 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 // This method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() { }

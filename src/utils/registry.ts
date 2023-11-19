@@ -62,21 +62,6 @@ export const getInstallCmd = async (components: string[]) => {
   return `npx shadcn-ui@latest add ${componentStr}`;
 };
 
-
-export const getInstallMultipleComponents = async (component: string) => {
-  const packageManager = await detectPackageManager();
-
-  if (packageManager === "bun") {
-    return `bunx shadcn-ui add ${component}`;
-  }
-
-  if (packageManager === "pnpm") {
-    return `pnpm dlx shadcn-ui@latest add ${component}`;
-  }
-
-  return `npx shadcn-ui@latest add ${component}`;
-};
-
 export const getInitCmd = async () => {
   const packageManager = await detectPackageManager();
 
