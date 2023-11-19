@@ -23,24 +23,31 @@ const commands = {
 export function activate(context: vscode.ExtensionContext) {
   let registryData: Components;
 
+  const checkRegistryData = async () => {
+    if (registryData) {
+      return true;
+    }
+
+    const newRegistryData = await getRegistry();
+    if (!newRegistryData) {
+      vscode.window.showErrorMessage("Can not get the component list");
+      return false;
+    }
+
+    registryData = newRegistryData;
+    return true;
+  };
+
   const disposables: vscode.Disposable[] = [
     vscode.commands.registerCommand(commands.initCli, async () => {
       const intCmd = await getInitCmd();
-      executeCommand(intCmd);
 
+      executeCommand(intCmd);
       await logCmd(intCmd);
     }),
+
     vscode.commands.registerCommand(commands.addNewComponent, async () => {
-      if (!registryData) {
-        const newRegistryData = await getRegistry();
-
-        if (!newRegistryData) {
-          vscode.window.showErrorMessage("Can not get the component list");
-          return;
-        }
-
-        registryData = newRegistryData;
-      }
+      await checkRegistryData();
 
       const selectedComponent = await vscode.window.showQuickPick(registryData, {
         matchOnDescription: true,
@@ -51,26 +58,17 @@ export function activate(context: vscode.ExtensionContext) {
       }
 
       const installCmd = await getInstallCmd([selectedComponent.label]);
-      executeCommand(installCmd);
 
+      executeCommand(installCmd);
       await logCmd(installCmd);
     }),
 
     vscode.commands.registerCommand(commands.addMultipleComponents, async () => {
-      if (!registryData) {
-        const newRegistryData = await getRegistry();
-
-        if (!newRegistryData) {
-          vscode.window.showErrorMessage("Can not get the component list");
-          return;
-        }
-
-        registryData = newRegistryData;
-      }
+      await checkRegistryData();
 
       const selectedComponents = await vscode.window.showQuickPick(registryData, {
         matchOnDescription: true,
-        canPickMany: true
+        canPickMany: true,
       });
 
       if (!selectedComponents) {
@@ -78,24 +76,14 @@ export function activate(context: vscode.ExtensionContext) {
       }
 
       const selectedComponent = selectedComponents.map((component) => component.label);
-
       const installCmd = await getInstallCmd(selectedComponent);
-      executeCommand(installCmd);
 
+      executeCommand(installCmd);
       await logCmd(installCmd);
     }),
 
     vscode.commands.registerCommand(commands.gotoComponentDoc, async () => {
-      if (!registryData) {
-        const newRegistryData = await getRegistry();
-
-        if (!newRegistryData) {
-          vscode.window.showErrorMessage("Can not get the component list");
-          return;
-        }
-
-        registryData = newRegistryData;
-      }
+      await checkRegistryData();
 
       const selectedComponent = await vscode.window.showQuickPick(registryData, {
         matchOnDescription: true,
@@ -106,26 +94,18 @@ export function activate(context: vscode.ExtensionContext) {
       }
 
       const componentDocLink = getComponentDocLink(selectedComponent.label);
-      vscode.env.openExternal(vscode.Uri.parse(componentDocLink));
 
+      vscode.env.openExternal(vscode.Uri.parse(componentDocLink));
       await logCmd(componentDocLink);
     }),
     vscode.commands.registerCommand(commands.reloadComponentList, async () => {
-      const newRegistryData = await getRegistry();
+      await checkRegistryData();
 
-      if (!newRegistryData) {
-        vscode.window.showErrorMessage("Can not get the component list");
-        return;
-      }
-
-      registryData = newRegistryData;
       vscode.window.showInformationMessage("shadcn/ui: Reloaded components");
-
       await logCmd("reload registry data");
     }),
     vscode.commands.registerCommand(commands.gotoDoc, async () => {
       vscode.env.openExternal(vscode.Uri.parse(shadCnDocUrl));
-
       await logCmd(shadCnDocUrl);
     }),
   ];
@@ -134,4 +114,4 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 // This method is called when your extension is deactivated
-export function deactivate() { }
+export function deactivate() {}
