@@ -36,10 +36,6 @@
         "title": "shadcn/ui: Add New Component"
       },
       {
-        "command": "shadcn-ui.addMultipleComponents",
-        "title": "shadcn/ui: Add Multiple Components"
-      },
-      {
         "command": "shadcn-ui.gotoComponentDoc",
         "title": "shadcn/ui: Open Component Documentation"
       },
