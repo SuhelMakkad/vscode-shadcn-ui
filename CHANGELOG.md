@@ -31,3 +31,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ### Added
 
 - Simple logs
+
+## [0.1.22] - 2023-11-19
+
+### Added
+
+- New command: Add Multiple Components
