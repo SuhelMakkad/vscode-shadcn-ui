@@ -25,7 +25,7 @@ export const getRegistry = async (): Promise<Components | null> => {
   const [res, err] = await to(fetch(reqUrl));
 
   if (err || !res) {
-    console.log("can not get the data");
+    console.error("can not get the data");
     return null;
   }
 

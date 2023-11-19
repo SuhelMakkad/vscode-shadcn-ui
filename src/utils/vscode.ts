@@ -24,11 +24,10 @@ export const getFileStat = async (fileName: string) => {
     const filePath = vscode.Uri.joinPath(workspaceFolder.uri, fileName);
     try {
       const fileMetadata = await vscode.workspace.fs.stat(filePath);
-      console.log(fileMetadata);
 
       return fileMetadata;
     } catch (error) {
-      console.log(error);
+      console.error(error);
       return null;
     }
   }
