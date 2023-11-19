@@ -3,6 +3,7 @@ import * as vscode from "vscode";
 import {
   getInitCmd,
   getInstallCmd,
+  getInstallMultipleComponents,
   getComponentDocLink,
   getRegistry,
   shadCnDocUrl,
@@ -14,6 +15,7 @@ import type { Components } from "./utils/registry";
 const commands = {
   initCli: "shadcn-ui.initCli",
   addNewComponent: "shadcn-ui.addNewComponent",
+  addMultipleComponents: "shadcn-ui.addMultipleComponents",
   gotoComponentDoc: "shadcn-ui.gotoComponentDoc",
   reloadComponentList: "shadcn-ui.reloadComponentList",
   gotoDoc: "shadcn-ui.gotoDoc",
@@ -41,6 +43,32 @@ export function activate(context: vscode.ExtensionContext) {
         registryData = newRegistryData;
       }
 
+      const selectedComponent = await vscode.window.showQuickPick(registryData, {
+        matchOnDescription: true,
+      });
+
+      if (!selectedComponent) {
+        return;
+      }
+
+      const installCmd = await getInstallCmd([selectedComponent.label]);
+      executeCommand(installCmd);
+
+      await logCmd(installCmd);
+    }),
+
+    vscode.commands.registerCommand(commands.addMultipleComponents, async () => {
+      if (!registryData) {
+        const newRegistryData = await getRegistry();
+
+        if (!newRegistryData) {
+          vscode.window.showErrorMessage("Can not get the component list");
+          return;
+        }
+
+        registryData = newRegistryData;
+      }
+
       const selectedComponents = await vscode.window.showQuickPick(registryData, {
         matchOnDescription: true,
         canPickMany: true
@@ -50,9 +78,9 @@ export function activate(context: vscode.ExtensionContext) {
         return;
       }
 
-      const selectedComponentsLabel = selectedComponents.map((component) => component.label);
+      const selectedComponent = selectedComponents.map((component) => component.label);
 
-      const installCmd = await getInstallCmd(selectedComponentsLabel.join(" "));
+      const installCmd = await getInstallMultipleComponents(selectedComponent.join(' '));
       executeCommand(installCmd);
 
       await logCmd(installCmd);

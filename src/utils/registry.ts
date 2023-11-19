@@ -47,7 +47,23 @@ export const getRegistry = async (): Promise<Components | null> => {
   return components;
 };
 
-export const getInstallCmd = async (component: string) => {
+export const getInstallCmd = async (components: string[]) => {
+  const packageManager = await detectPackageManager();
+  const componentStr = components.join(" ");
+
+  if (packageManager === "bun") {
+    return `bunx shadcn-ui add ${componentStr}`;
+  }
+
+  if (packageManager === "pnpm") {
+    return `pnpm dlx shadcn-ui@latest add ${componentStr}`;
+  }
+
+  return `npx shadcn-ui@latest add ${componentStr}`;
+};
+
+
+export const getInstallMultipleComponents = async (component: string) => {
   const packageManager = await detectPackageManager();
 
   if (packageManager === "bun") {
