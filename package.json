@@ -1,5 +1,5 @@
 {
-  "version": "0.1.22",
+  "version": "0.1.3",
   "name": "shadcn-ui",
   "displayName": "shadcn/ui",
   "description": "Add components from shadcn/ui directly from VS Code",

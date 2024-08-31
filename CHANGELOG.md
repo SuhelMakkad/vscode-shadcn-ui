@@ -37,3 +37,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ### Added
 
 - New command: Add Multiple Components
+
+## [0.1.3] - 2024-08-31
+
+### Fixed
+
+- Updated to new version of shadcn cli

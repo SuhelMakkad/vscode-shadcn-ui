@@ -52,28 +52,28 @@ export const getInstallCmd = async (components: string[]) => {
   const componentStr = components.join(" ");
 
   if (packageManager === "bun") {
-    return `bunx shadcn-ui add ${componentStr}`;
+    return `bunx --bun shadcn@latest add ${componentStr}`;
   }
 
   if (packageManager === "pnpm") {
-    return `pnpm dlx shadcn-ui@latest add ${componentStr}`;
+    return `pnpm dlx shadcn@latest add ${componentStr}`;
   }
 
-  return `npx shadcn-ui@latest add ${componentStr}`;
+  return `npx shadcn@latest add ${componentStr}`;
 };
 
 export const getInitCmd = async () => {
   const packageManager = await detectPackageManager();
 
   if (packageManager === "bun") {
-    return "bunx shadcn-ui init";
+    return "bunx --bun shadcn@latest init";
   }
 
   if (packageManager === "pnpm") {
-    return "pnpm dlx shadcn-ui@latest init";
+    return "pnpm dlx shadcn@latest init";
   }
 
-  return "npx shadcn-ui@latest init";
+  return "npx shadcn@latest init";
 };
 
 export const getComponentDocLink = (component: string) => {
