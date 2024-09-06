@@ -12,12 +12,12 @@ import { logCmd } from "./utils/logs";
 import type { Components } from "./utils/registry";
 
 const commands = {
-  initCli: "shadcn-ui.initCli",
-  addNewComponent: "shadcn-ui.addNewComponent",
-  addMultipleComponents: "shadcn-ui.addMultipleComponents",
-  gotoComponentDoc: "shadcn-ui.gotoComponentDoc",
-  reloadComponentList: "shadcn-ui.reloadComponentList",
-  gotoDoc: "shadcn-ui.gotoDoc",
+  initCli: "shadcn.initCli",
+  addNewComponent: "shadcn.addNewComponent",
+  addMultipleComponents: "shadcn.addMultipleComponents",
+  gotoComponentDoc: "shadcn.gotoComponentDoc",
+  reloadComponentList: "shadcn.reloadComponentList",
+  gotoDoc: "shadcn.gotoDoc",
 } as const;
 
 export function activate(context: vscode.ExtensionContext) {

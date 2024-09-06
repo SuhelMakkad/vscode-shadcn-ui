@@ -28,27 +28,27 @@
   "contributes": {
     "commands": [
       {
-        "command": "shadcn-ui.initCli",
+        "command": "shadcn.initCli",
         "title": "shadcn/ui: Install CLI"
       },
       {
-        "command": "shadcn-ui.addNewComponent",
+        "command": "shadcn.addNewComponent",
         "title": "shadcn/ui: Add New Component"
       },
       {
-        "command": "shadcn-ui.addMultipleComponents",
+        "command": "shadcn.addMultipleComponents",
         "title": "shadcn/ui: Add Multiple Components"
       },
       {
-        "command": "shadcn-ui.gotoComponentDoc",
+        "command": "shadcn.gotoComponentDoc",
         "title": "shadcn/ui: Open Component Documentation"
       },
       {
-        "command": "shadcn-ui.reloadComponentList",
+        "command": "shadcn.reloadComponentList",
         "title": "shadcn/ui: Reload Component List"
       },
       {
-        "command": "shadcn-ui.gotoDoc",
+        "command": "shadcn.gotoDoc",
         "title": "shadcn/ui: Open Documentation"
       }
     ]
