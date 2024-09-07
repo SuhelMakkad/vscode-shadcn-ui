@@ -38,7 +38,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - New command: Add Multiple Components
 
-## [0.1.3] - 2024-08-31
+## [0.1.31] - 2024-08-31
 
 ### Fixed
 
