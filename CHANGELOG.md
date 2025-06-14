@@ -43,3 +43,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ### Fixed
 
 - Updated to new version of shadcn cli
+
+## [0.1.32] - 2025-06-14
+
+### Added
+
+- Update registry json URL
