@@ -21,7 +21,7 @@ export const shadCnDocUrl = "https://ui.shadcn.com/docs";
 export type Components = Component[];
 
 export const getRegistry = async (): Promise<Components | null> => {
-  const reqUrl = "https://ui.shadcn.com/registry/index.json";
+  const reqUrl = "https://ui.shadcn.com/r/index.json";
   const [res, err] = await to(fetch(reqUrl));
 
   if (err || !res) {
