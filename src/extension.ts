@@ -21,14 +21,13 @@ const commands = {
 } as const;
 
 class GetShadcnComponentListTool implements vscode.LanguageModelTool<{}> {
-  private static registryCache: { data: any; timestamp: number } | null = null;
+  private static registryCache: { data: Components; timestamp: number } | null = null;
   private static readonly cacheTtl = 5 * 60 * 1000; // 5 minutes
 
   async invoke(
     options: vscode.LanguageModelToolInvocationOptions<{}>,
     token: vscode.CancellationToken
   ): Promise<vscode.LanguageModelToolResult> {
-    
       try {
         if (token.isCancellationRequested) {
           return new vscode.LanguageModelToolResult([
