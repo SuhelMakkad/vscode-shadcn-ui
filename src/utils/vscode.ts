@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 
 export type PackageManager = "npm" | "pnpm" | "yarn" | "bun";
-export async function executeCommand (
+export async function executeCommand(
   cmd: string,
   createNew = true,
   name?: string
@@ -19,17 +19,15 @@ export async function executeCommand (
         reject(new Error("Shell integration timeout"));
       }, 5000);
 
-      const disposable = vscode.window.onDidChangeTerminalShellIntegration(
-        (e) => {
-          if (e.terminal === terminal) {
-            clearTimeout(timeout);
-            disposable.dispose();
-            resolve();
-          }
+      const disposable = vscode.window.onDidChangeTerminalShellIntegration((e) => {
+        if (e.terminal === terminal) {
+          clearTimeout(timeout);
+          disposable.dispose();
+          resolve();
         }
-      );
+      });
 
-      if (terminal.shellIntegration) {
+      if (terminal?.shellIntegration) {
         clearTimeout(timeout);
         disposable.dispose();
         resolve();
@@ -52,7 +50,7 @@ export async function executeCommand (
     // if we are hitting this point, something is messed up real bad
     return [terminal, undefined, undefined];
   }
-};
+}
 
 export const getFileStat = async (fileName: string) => {
   // Get the currently opened workspace folders
