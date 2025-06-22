@@ -49,3 +49,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ### Added
 
 - Update registry json URL
+
+## [0.1.33] - 2025-06-22
+
+- Add tools for copilot agent mode
