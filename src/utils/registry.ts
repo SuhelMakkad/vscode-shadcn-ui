@@ -13,7 +13,7 @@ type OgComponent = {
 
 type Component = {
   label: string;
-  detail?: string;
+  dependencies?: string;
 };
 
 export const shadCnDocUrl = "https://ui.shadcn.com/docs";
@@ -38,7 +38,7 @@ export const getRegistry = async (): Promise<Components | null> => {
   const components: Components = (data as OgComponent[]).map((c) => {
     const component: Component = {
       label: c.name,
-      detail: `dependencies: ${c.dependencies ? c.dependencies.join(" ") : "no dependency"}`,
+      dependencies: `dependencies: ${c.dependencies ? c.dependencies.join(" ") : "no dependency"}`,
     };
 
     return component;

@@ -1,5 +1,5 @@
 {
-  "version": "0.1.32",
+  "version": "0.1.33",
   "name": "shadcn-ui",
   "displayName": "shadcn/ui",
   "description": "Add components from shadcn/ui directly from VS Code",
@@ -51,6 +51,39 @@
         "command": "shadcn-ui.gotoDoc",
         "title": "shadcn/ui: Open Documentation"
       }
+    ],
+    "languageModelTools": [
+      {
+        "name": "get_shadcnComponentList",
+        "displayName": "shadcn/ui: Get Component List",
+        "canBeReferencedInPrompt": true,
+        "toolReferenceName": "get_shadcnComponentList",
+        "userDescription": "Get the list of components from shadcn/ui",
+        "modelDescription": "Gets a list of re-usable react (tsx) components from shadcn/ui."
+      },
+      {
+        "name": "install_shadcnComponent",
+        "displayName": "shadcn/ui: Download Component",
+        "canBeReferencedInPrompt": true,
+        "toolReferenceName": "install_shadcnComponent",
+        "userDescription": "Download a component from shadcn/ui",
+        "modelDescription": "Downloads a component from shadcn/ui and adds it to the project automatically, usually under the (root)/components/ directory.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Name(s) of the component to be downloaded. The name should be exactly as it appears in the shadcn/ui documentation."
+            }
+          },
+          "required": [
+            "id"
+          ]
+        }
+      }
     ]
   },
   "scripts": {
@@ -73,6 +106,7 @@
     "@typescript-eslint/eslint-plugin": "^5.59.8",
     "@typescript-eslint/parser": "^5.59.8",
     "@vscode/test-electron": "^2.3.2",
+    "@vscode/vsce": "^3.5.0",
     "eslint": "^8.41.0",
     "glob": "^8.1.0",
     "mocha": "^10.2.0",
